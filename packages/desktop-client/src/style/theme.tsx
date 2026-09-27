@@ -4,6 +4,7 @@ import darkThemeCss from '@actual-app/components/themes/dark.css?inline';
 import lightThemeCss from '@actual-app/components/themes/light.css?inline';
 import midnightThemeCss from '@actual-app/components/themes/midnight.css?inline';
 import paletteCss from '@actual-app/components/themes/palette.css?inline';
+import ynabThemeCss from '@actual-app/components/themes/ynab.css?inline';
 import type { DarkTheme, Theme } from '@actual-app/core/types/prefs';
 
 import { useGlobalPref } from '#hooks/useGlobalPref';
@@ -16,6 +17,7 @@ import {
 import type { BaseTheme } from './customThemes';
 
 const themes = {
+  ynab: { name: 'YNAB', colors: ynabThemeCss },
   light: { name: 'Light', colors: lightThemeCss },
   dark: { name: 'Dark', colors: darkThemeCss },
   midnight: { name: 'Midnight', colors: midnightThemeCss },
@@ -34,7 +36,7 @@ export const darkThemeOptions = Object.entries({
 }).map(([key, { name }]) => [key, name] as [DarkTheme, string]);
 
 export function useTheme() {
-  const [theme = 'auto', setThemePref] = useGlobalPref('theme');
+  const [theme = 'ynab', setThemePref] = useGlobalPref('theme');
   return [theme, setThemePref] as const;
 }
 

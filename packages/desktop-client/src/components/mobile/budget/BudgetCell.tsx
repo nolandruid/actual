@@ -175,9 +175,15 @@ export function BudgetCell<
     <CellValue
       binding={binding}
       type="financial"
-      aria-label={t('Budgeted amount for {{categoryName}} category', {
-        categoryName: category.name,
-      })}
+      aria-label={
+        budgetType === 'tracking'
+          ? t('Budgeted amount for {{categoryName}} category', {
+              categoryName: category.name,
+            })
+          : t('Assigned amount for {{categoryName}} category', {
+              categoryName: category.name,
+            })
+      }
       {...props}
     >
       {({ type, name, value }) =>

@@ -17,6 +17,7 @@ import { PrivacyFilter } from '#components/PrivacyFilter';
 import { CellValue } from '#components/spreadsheet/CellValue';
 import { useCategoryScheduleGoalTemplateIndicator } from '#hooks/useCategoryScheduleGoalTemplateIndicator';
 import { useFormat } from '#hooks/useFormat';
+import { useSyncedPref } from '#hooks/useSyncedPref';
 import type { Binding } from '#spreadsheet';
 
 import { getColumnWidth, PILL_STYLE } from './BudgetTable';
@@ -38,6 +39,7 @@ export function SpentCell({
 }: SpentCellProps) {
   const { t } = useTranslation();
   const format = useFormat();
+  const [budgetType = 'envelope'] = useSyncedPref('budgetType');
   const columnWidth = getColumnWidth({
     show3Columns,
   });
@@ -52,9 +54,15 @@ export function SpentCell({
     <CellValue<'envelope-budget' | 'tracking-budget', 'sum-amount'>
       binding={binding}
       type="financial"
-      aria-label={t('Spent amount for {{categoryName}} category', {
-        categoryName: category.name,
-      })}
+      aria-label={
+        budgetType === 'tracking'
+          ? t('Spent amount for {{categoryName}} category', {
+              categoryName: category.name,
+            })
+          : t('Activity amount for {{categoryName}} category', {
+              categoryName: category.name,
+            })
+      }
     >
       {({ type, value }) => (
         <>

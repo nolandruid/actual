@@ -88,7 +88,7 @@ function ToBudget({ toBudget, onPress, show3Columns }: ToBudgetProps) {
               minFontSizePx={6}
               maxFontSizePx={12}
               mode="oneline"
-              title={amount < 0 ? t('Overbudgeted') : t('To Budget')}
+              title={amount < 0 ? t('Over-assigned') : t('Ready to Assign')}
               style={{
                 ...(amount < 0 ? styles.smallText : {}),
                 color: theme.formInputText,
@@ -521,7 +521,11 @@ function BudgetTableHeader({
                         minFontSizePx={8}
                         maxFontSizePx={12}
                         mode="multiline"
-                        title={t('Budgeted')}
+                        title={
+                          budgetType === 'tracking'
+                            ? t('Budgeted')
+                            : t('Assigned')
+                        }
                         style={{ color: theme.formInputText, paddingRight: 4 }}
                       />
                     </View>
@@ -589,7 +593,11 @@ function BudgetTableHeader({
                         minFontSizePx={6}
                         maxFontSizePx={12}
                         mode="oneline"
-                        title={t('Spent')}
+                        title={
+                          budgetType === 'tracking'
+                            ? t('Spent')
+                            : t('Activity')
+                        }
                         style={{ color: theme.formInputText, paddingRight: 4 }}
                       />
                     </View>
@@ -633,7 +641,9 @@ function BudgetTableHeader({
                     minFontSizePx={6}
                     maxFontSizePx={12}
                     mode="oneline"
-                    title={t('Balance')}
+                    title={
+                      budgetType === 'tracking' ? t('Balance') : t('Available')
+                    }
                     style={{ color: theme.formInputText }}
                   />
                 </View>

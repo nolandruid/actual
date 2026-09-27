@@ -29,6 +29,7 @@ export function ThemeSelector({ style }: ThemeSelectorProps) {
   const { t } = useTranslation();
 
   const themeIcons = {
+    ynab: SvgSun,
     light: SvgSun,
     dark: SvgMoonStars,
     auto: SvgSystem,

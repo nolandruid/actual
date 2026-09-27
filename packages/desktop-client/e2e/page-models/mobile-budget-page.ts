@@ -55,10 +55,10 @@ export class MobileBudgetPage {
 
     // Envelope budget summary buttons
     this.toBudgetButton = this.budgetTableHeader.getByRole('button', {
-      name: 'To Budget',
+      name: 'Ready to Assign',
     });
     this.overbudgetedButton = this.budgetTableHeader.getByRole('button', {
-      name: 'Overbudgeted',
+      name: 'Over-assigned',
     });
 
     // Tracking budget summary buttons
@@ -73,10 +73,12 @@ export class MobileBudgetPage {
     });
 
     this.budgetedHeaderButton = this.budgetTableHeader.getByRole('button', {
-      name: 'Budgeted',
+      // Envelope budgets use YNAB-style "Assigned", tracking keeps "Budgeted"
+      name: /Assigned|Budgeted/,
     });
     this.spentHeaderButton = this.budgetTableHeader.getByRole('button', {
-      name: 'Spent',
+      // Envelope budgets use YNAB-style "Activity", tracking keeps "Spent"
+      name: /Activity|Spent/,
     });
 
     this.budgetTable = page.getByTestId('budget-table');

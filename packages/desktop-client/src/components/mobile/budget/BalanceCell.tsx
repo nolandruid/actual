@@ -68,9 +68,15 @@ export function BalanceCell({
 
   return (
     <BalanceWithCarryover
-      aria-label={t('Balance for {{categoryName}} category', {
-        categoryName: category.name,
-      })} // Translated aria-label
+      aria-label={
+        budgetType === 'tracking'
+          ? t('Balance for {{categoryName}} category', {
+              categoryName: category.name,
+            })
+          : t('Available for {{categoryName}} category', {
+              categoryName: category.name,
+            })
+      } // Translated aria-label
       type="financial"
       carryover={carryover}
       balance={binding}

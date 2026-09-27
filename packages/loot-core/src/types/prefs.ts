@@ -108,7 +108,7 @@ export type LocalPrefs = Partial<{
   'mobile.bankSyncProvidersCollapsed': boolean;
 }>;
 
-export type Theme = 'light' | 'dark' | 'auto' | 'midnight' | string;
+export type Theme = 'ynab' | 'light' | 'dark' | 'auto' | 'midnight' | string;
 export type DarkTheme = 'dark' | 'midnight';
 
 // GlobalPrefs are the parsed global-store.json values

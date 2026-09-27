@@ -151,7 +151,7 @@ export function TotalsList({ prevMonthName, style }: TotalsListProps) {
         </Block>
 
         <Block>
-          <Trans>Budgeted</Trans>
+          <Trans>Assigned</Trans>
         </Block>
 
         <Block>

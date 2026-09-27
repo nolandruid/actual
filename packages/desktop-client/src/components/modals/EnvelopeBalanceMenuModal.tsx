@@ -68,7 +68,7 @@ export function EnvelopeBalanceMenuModal({
                 fontWeight: 400,
               }}
             >
-              <Trans>Balance</Trans>
+              <Trans>Available</Trans>
             </Text>
             <BalanceWithCarryover
               isDisabled

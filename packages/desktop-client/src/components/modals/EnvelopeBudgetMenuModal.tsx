@@ -113,7 +113,7 @@ export function EnvelopeBudgetMenuModal({
                 fontWeight: 400,
               }}
             >
-              <Trans>Budgeted</Trans>
+              <Trans>Assigned</Trans>
             </Text>
             <AmountInput
               value={integerToAmount(budgeted || 0)}

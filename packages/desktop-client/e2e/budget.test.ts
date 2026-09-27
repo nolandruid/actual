@@ -33,7 +33,7 @@ test.describe('Budget', () => {
       timeout: 10000,
     });
     await expect(summary.getByText(/^Overspent in /)).toBeVisible();
-    await expect(summary.getByText('Budgeted')).toBeVisible();
+    await expect(summary.getByText('Assigned', { exact: true })).toBeVisible();
     await expect(summary.getByText('For next month')).toBeVisible();
     await expect(page).toMatchThemeScreenshots();
   });

@@ -87,7 +87,7 @@ export const BudgetTotalsMonth = memo(function BudgetTotalsMonth() {
     >
       <View style={headerLabelStyle}>
         <Text style={{ color: theme.tableHeaderText }}>
-          <Trans>Budgeted</Trans>
+          <Trans>Assigned</Trans>
         </Text>
         <EnvelopeCellValue
           binding={envelopeBudget.totalBudgeted}
@@ -100,7 +100,7 @@ export const BudgetTotalsMonth = memo(function BudgetTotalsMonth() {
       </View>
       <View style={headerLabelStyle}>
         <Text style={{ color: theme.tableHeaderText }}>
-          <Trans>Spent</Trans>
+          <Trans>Activity</Trans>
         </Text>
         <EnvelopeCellValue binding={envelopeBudget.totalSpent} type="financial">
           {props => <CellValueText {...props} style={cellStyle} />}
@@ -108,7 +108,7 @@ export const BudgetTotalsMonth = memo(function BudgetTotalsMonth() {
       </View>
       <View style={headerLabelStyle}>
         <Text style={{ color: theme.tableHeaderText }}>
-          <Trans>Balance</Trans>
+          <Trans>Available</Trans>
         </Text>
         <EnvelopeCellValue
           binding={envelopeBudget.totalBalance}

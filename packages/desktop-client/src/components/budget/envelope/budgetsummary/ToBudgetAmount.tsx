@@ -56,7 +56,7 @@ export function ToBudgetAmount({
 
   return (
     <View style={{ alignItems: 'center', ...style }}>
-      <Block>{isNegative ? t('Overbudgeted:') : t('To Budget:')}</Block>
+      <Block>{isNegative ? t('Over-assigned:') : t('Ready to Assign:')}</Block>
       <View>
         <Tooltip
           content={
