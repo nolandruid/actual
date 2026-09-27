@@ -76,7 +76,15 @@ export function AuthSettings() {
               />
             </>
           )}
-          {loginMethod !== 'password' && (
+          {loginMethod === 'header' && (
+            <Label
+              style={{ paddingTop: 5 }}
+              title={t(
+                'Users are signed in automatically by a trusted proxy (header authentication).',
+              )}
+            />
+          )}
+          {loginMethod === 'openid' && (
             <>
               <Button
                 style={{

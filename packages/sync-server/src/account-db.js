@@ -32,7 +32,7 @@ export function needsBootstrap() {
 export function listLoginMethods() {
   const accountDb = getAccountDb();
   const rows = accountDb.all('SELECT method, display_name, active FROM auth');
-  return rows
+  const methods = rows
     .filter(f =>
       rows.length > 1 && config.get('enforceOpenId')
         ? f.method === 'openid'
@@ -43,6 +43,23 @@ export function listLoginMethods() {
       active: r.active,
       displayName: r.display_name,
     }));
+
+  // Header auth (ACTUAL_LOGIN_METHOD=header) has no row in the auth table, and
+  // the client picks the active method from this list. Advertise it as the
+  // active method so the web client signs in through the trusted proxy, and
+  // keep the stored methods as inactive fallbacks.
+  if (
+    config.get('loginMethod') === 'header' &&
+    config.get('allowedLoginMethods').includes('header') &&
+    !methods.some(m => m.method === 'header')
+  ) {
+    return [
+      { method: 'header', active: 1, displayName: 'Trusted proxy' },
+      ...methods.map(m => ({ ...m, active: 0 })),
+    ];
+  }
+
+  return methods;
 }
 
 export function getActiveLoginMethod() {
