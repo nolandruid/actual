@@ -14,6 +14,7 @@ import {
 } from './account-db';
 import { isValidRedirectUrl, loginWithOpenIdSetup } from './accounts/openid';
 import { changePassword, loginWithPassword } from './accounts/password';
+import { config } from './load-config';
 import { errorMiddleware, requestLoggerMiddleware } from './util/middlewares';
 import { validateAuthHeader, validateSession } from './util/validate-user';
 
@@ -46,8 +47,11 @@ app.get('/needs-bootstrap', (req, res) => {
     status: 'ok',
     data: {
       bootstrapped: !needsBootstrap(),
+      // A configured header login (ACTUAL_LOGIN_METHOD=header) has no row in
+      // the auth table, so don't let a lone password row mask it.
       loginMethod:
-        availableLoginMethods.length === 1
+        availableLoginMethods.length === 1 &&
+        config.get('loginMethod') !== 'header'
           ? availableLoginMethods[0].method
           : getLoginMethod(),
       availableLoginMethods,
