@@ -26,7 +26,7 @@ import { Link } from '#components/common/Link';
 import { Notes } from '#components/Notes';
 import { DropHighlight, useDraggable, useDroppable } from '#components/sort';
 import type { OnDragChangeCallback, OnDropCallback } from '#components/sort';
-import { CellValue } from '#components/spreadsheet/CellValue';
+import { CellValue, CellValueText } from '#components/spreadsheet/CellValue';
 import { useContextMenu } from '#hooks/useContextMenu';
 import { useDragRef } from '#hooks/useDragRef';
 import { useIsTestEnv } from '#hooks/useIsTestEnv';
@@ -126,7 +126,22 @@ export function Account<FieldName extends SheetFields<'account'>>({
   const reopenAccount = useReopenAccountMutation();
   const updateAccount = useUpdateAccountMutation();
 
-  const balanceCell = <CellValue binding={query} type="financial" />;
+  // Negative balances in red, as in YNAB. errorTextMenu is the red meant for
+  // dark surfaces like the sidebar.
+  const balanceCell = (
+    <CellValue binding={query} type="financial">
+      {props => (
+        <CellValueText
+          {...props}
+          style={
+            typeof props.value === 'number' && props.value < 0
+              ? { color: theme.errorTextMenu }
+              : undefined
+          }
+        />
+      )}
+    </CellValue>
+  );
 
   const isContextMenuOpen = useSelector(state =>
     state.contextMenu.items.some(
