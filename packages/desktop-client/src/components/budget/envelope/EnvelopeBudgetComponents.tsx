@@ -572,6 +572,9 @@ export function IncomeGroupMonth({ month }: IncomeGroupMonthProps) {
         valueProps={{
           binding: envelopeBudget.groupIncomeReceived,
           type: 'financial',
+          // Income total in green when positive, like Ready to Assign.
+          getValueStyle: value =>
+            value > 0 ? { color: theme.toBudgetPositive } : {},
         }}
       />
     </View>
